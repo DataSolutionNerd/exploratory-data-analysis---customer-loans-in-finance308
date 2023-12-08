@@ -12,7 +12,7 @@ def extracting_credentials():
 credentials_dict = extracting_credentials()
 
 
-class RDSDatabaseConnector:
+class RDSDatabaseConnector():
 
     def __init__(self, credentials_dict):
         self.credentials_dict = credentials_dict
@@ -28,7 +28,12 @@ class RDSDatabaseConnector:
         self.loan_payments_df = pd.read_sql_table('loan_payments', self.engine)
         return self.loan_payments_df
         
-    def create_csv_file(loan_data_df):
+    def create_csv_file(self,loan_data_df):
         with open('csv_files/loan_payments.csv', 'w') as file:
             loan_data_df.to_csv(file, encoding= 'utf-8', index= False)
 
+# run functions
+conn = RDSDatabaseConnector(credentials_dict) 
+conn.initialise_SQLAlchemy()
+data_extracted = conn.get_loan_data_df()
+conn.create_csv_file(data_extracted)
