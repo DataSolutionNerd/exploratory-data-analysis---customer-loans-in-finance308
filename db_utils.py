@@ -34,9 +34,10 @@ class RDSDatabaseConnector():
 
     def load_csv_file():
         pd.read_csv('csv_files/loan_payments.csv', index_col='id')
-        
+
+if __name__ == '__main__':   
 # run functions
-conn = RDSDatabaseConnector(credentials_dict) 
-conn.initialise_SQLAlchemy()
-data_extracted = conn.get_loan_data_df()
-conn.create_csv_file(data_extracted)
+    conn = RDSDatabaseConnector(credentials_dict) 
+    conn.initialise_SQLAlchemy()
+    data_extracted = conn.get_loan_data_df()
+    conn.create_csv_file(data_extracted)
